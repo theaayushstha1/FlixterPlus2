@@ -1,5 +1,6 @@
 package com.example.flixsterplus
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,8 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.flixsterplus.models.Movie
-import com.example.flixterplus.R
 
 class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -28,11 +30,19 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
         holder.title.text = movie.title
         holder.overview.text = movie.overview
 
-        // Load the movie poster using Glide with placeholder and error images
+        // Check and log the URL before loading
+        Log.d("MovieAdapter", "Poster URL: ${movie.posterUrl}")
+
+        // Load the movie poster using Glide with enhancements
         Glide.with(holder.itemView.context)
             .load(movie.posterUrl)
-            .placeholder(R.drawable.placeholder_background) // Placeholder while loading
-            .error(R.drawable.placeholder_foreground) // Error image if loading fails
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.placeholder_background)  // Placeholder while loading
+                    .error(R.drawable.error_image_foreground)         // Error image if loading fails
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)         // Cache both the full-size image and the resized one
+                    .centerCrop()                                     // Apply center crop to maintain aspect ratio and fill the space
+            )
             .into(holder.posterImage)
     }
 
