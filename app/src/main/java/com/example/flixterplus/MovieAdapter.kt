@@ -1,5 +1,6 @@
 package com.example.flixsterplus
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -44,6 +45,18 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
                     .centerCrop()                                     // Apply center crop to maintain aspect ratio and fill the space
             )
             .into(holder.posterImage)
+
+        // Add a click listener to navigate to DetailsActivity
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, DetailsActivity::class.java).apply {
+                putExtra("TITLE", movie.title)
+                putExtra("OVERVIEW", movie.overview)
+                putExtra("POSTER_URL", movie.posterUrl)
+
+            }
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = movies.size

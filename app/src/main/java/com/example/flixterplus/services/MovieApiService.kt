@@ -8,8 +8,8 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MovieApiService {
-    @GET("movie/now_playing")
-    fun getNowPlayingMovies(@Query("api_key") apiKey: String = "a07e22bc18f5cb106bfe4cc1f83ad8ed"): Call<MovieResponse>
+    @GET("movie/popular")
+    fun getPopularMovies(@Query("api_key") apiKey: String = "a07e22bc18f5cb106bfe4cc1f83ad8ed"): Call<MovieResponse>
 
     @GET("person/popular")
     fun getPopularActors(@Query("api_key") apiKey: String = "a07e22bc18f5cb106bfe4cc1f83ad8ed"): Call<ActorResponse>

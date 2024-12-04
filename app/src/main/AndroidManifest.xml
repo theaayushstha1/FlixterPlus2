@@ -16,6 +16,7 @@
         android:theme="@style/Theme.Flixterplus"
         tools:targetApi="31">
 
+        <!-- MainActivity declaration -->
         <activity
             android:name="com.example.flixsterplus.MainActivity"
             android:exported="true">
@@ -24,5 +25,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- DetailsActivity declaration -->
+        <activity
+            android:name="com.example.flixsterplus.DetailsActivity"
+            android:exported="false" />
+
     </application>
 </manifest>
